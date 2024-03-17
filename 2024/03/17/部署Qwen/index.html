@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>QWen部署（配置环境篇） | YounG_Zhang's planet</title><meta name="author" content="YounG"><meta name="copyright" content="YounG"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="最基础的内容，备忘录。 一、远端miniconda安装使用清华镜像源进行下载安装 标注有py的说明自带安装了该版本python，但是影响不大，因为后续会使用自己创建的环境以防环境间相互干扰。选择需要的版本然后使用wget命令进行安装： 1234567mkdir minicondacd minicondawget https:&#x2F;&#x2F;repo.anaconda.com&#x2F;miniconda&#x2F;Minicon">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QWen部署（配置环境篇）">
+<meta property="og:url" content="http://example.com/2024/03/17/%E9%83%A8%E7%BD%B2Qwen/index.html">
+<meta property="og:site_name" content="YounG_Zhang&#39;s planet">
+<meta property="og:description" content="最基础的内容，备忘录。 一、远端miniconda安装使用清华镜像源进行下载安装 标注有py的说明自带安装了该版本python，但是影响不大，因为后续会使用自己创建的环境以防环境间相互干扰。选择需要的版本然后使用wget命令进行安装： 1234567mkdir minicondacd minicondawget https:&#x2F;&#x2F;repo.anaconda.com&#x2F;miniconda&#x2F;Minicon">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/QWen.png">
+<meta property="article:published_time" content="2024-03-17T08:50:00.000Z">
+<meta property="article:modified_time" content="2024-03-17T08:56:24.141Z">
+<meta property="article:author" content="YounG">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="Basic Skills">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/QWen.png"><link rel="shortcut icon" href="/img/faviconn.png"><link rel="canonical" href="http://example.com/2024/03/17/%E9%83%A8%E7%BD%B2Qwen/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'QWen部署（配置环境篇）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2024-03-17 16:56:24'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avator.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/QWen.png')"><nav id="nav"><span id="blog-info"><a href="/" title="YounG_Zhang's planet"><span class="site-name">YounG_Zhang's planet</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">QWen部署（配置环境篇）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-03-17T08:50:00.000Z" title="Created 2024-03-17 16:50:00">2024-03-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-03-17T08:56:24.141Z" title="Updated 2024-03-17 16:56:24">2024-03-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI/">AI</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI/LLM/">LLM</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="QWen部署（配置环境篇）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>最基础的内容，备忘录。</p>
+<h2 id="一、远端miniconda安装"><a href="#一、远端miniconda安装" class="headerlink" title="一、远端miniconda安装"></a>一、远端miniconda安装</h2><p>使用清华镜像源进行下载安装</p>
+<p>标注有py的说明自带安装了该版本python，但是影响不大，因为后续会使用自己创建的环境以防环境间相互干扰。选择需要的版本然后使用wget命令进行安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir miniconda</span><br><span class="line">cd miniconda</span><br><span class="line">wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">bash ~/miniconda/Miniconda3-latest-Linux-x86_64.sh  #解压</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">环境变量添加过似乎没有什么用</span></span><br><span class="line">/home/ubuntu/miniconda3/bin/conda install python=3.10</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>删除源文件.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf ~/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+<p>查看conda是否安装成功并切换到目录下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/miniconda3/bin/activate  激活base环境</span><br></pre></td></tr></table></figure>
+<p>最终由于gpu3不能联网，选择先在win下载Miniconda3-py38_4.8.3-Linux-x86_64.sh，使用filezillia传输至集群</p>
+<h2 id="二、进入虚拟环境"><a href="#二、进入虚拟环境" class="headerlink" title="二、进入虚拟环境"></a>二、进入虚拟环境</h2><h3 id="1、可联网的情况下"><a href="#1、可联网的情况下" class="headerlink" title="1、可联网的情况下"></a>1、可联网的情况下</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">创建虚拟环境</span></span><br><span class="line">~/miniconda3/bin/conda create -n &lt;env_name&gt; python=xxx</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入base环境</span></span><br><span class="line">source ~/miniconda3/bin/activate</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">进入创建的虚拟环境</span></span><br><span class="line">source activate 环境名</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示当前目录下安装的库</span></span><br><span class="line">conda list</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">To activate this environment, use</span></span><br><span class="line">conda activate qwen</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">To deactivate an active environment, use</span></span><br><span class="line">conda deactivate</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">### （1）上述操作修改了.bashrc文件，相当于把该操作作用于username下的所有目录中，不影响其他用户且不需要每次打开都初始化一遍。</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">### （2）可以通过输入python和conda -V查看版本来判断自己目前的环境到底是否正确。</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 删除环境：</span></span></span><br><span class="line">```shell</span><br><span class="line">conda remove -n envname --all</span><br></pre></td></tr></table></figure>
+<h2 id="三、SSH远程连接配置（VS-Code"><a href="#三、SSH远程连接配置（VS-Code" class="headerlink" title="三、SSH远程连接配置（VS Code)"></a>三、SSH远程连接配置（VS Code)</h2><h3 id="1-VScode的下载和安装："><a href="#1-VScode的下载和安装：" class="headerlink" title="1. VScode的下载和安装："></a>1. VScode的下载和安装：</h3><p><a target="_blank" rel="noopener" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a><br>如遇网络问题无法现在或下载速度较慢，可以连接团队代理服务Resources </p>
+<h3 id="2-安装SSH远程连接插件-Remote-SSH"><a href="#2-安装SSH远程连接插件-Remote-SSH" class="headerlink" title="2. 安装SSH远程连接插件 Remote-SSH :"></a>2. 安装SSH远程连接插件 Remote-SSH :</h3><p>选择左侧扩展图标(Extensions), 搜索remote,选择Remote-SSH,点击install完成安装，安装成功后会在左侧出现一个新的选项卡(Remote Explorer)。</p>
+<h3 id="3-添加待连接的服务器配置："><a href="#3-添加待连接的服务器配置：" class="headerlink" title="3. 添加待连接的服务器配置："></a>3. 添加待连接的服务器配置：</h3><p>选择 SSH TARGETS右侧的+号以添加新的服务器连接，在弹出的框里按照所给提示填写 ssh 用户名@账号ip 如我在1-4机器上的账号对应的连接格式为</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh &lt;你的用户名&gt;@&lt;对应IP&gt; -p &lt;对应端口&gt; </span><br></pre></td></tr></table></figure>
+<p>然后会弹出保存配置文件 (该文件里可以继续添加多个账号)的位置选择，一般选第一个保存到用户文件夹下，完成上述步骤后，点击设置转到配置(Config)文件进行确认和修改，这里需要注意的是Host任意取名(尽量用英文字母，最好不要将ip直接复制以免无法识别，避免出现,.&#x2F;%等非法字符)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HostName ip地址</span><br><span class="line">Port     端口号(比如1-4机器为10422，1-3机器为10322)</span><br><span class="line">User     用户名</span><br></pre></td></tr></table></figure>
+<h3 id="4-连接服务器："><a href="#4-连接服务器：" class="headerlink" title="4. 连接服务器："></a>4. 连接服务器：</h3><p>右击即可出现以下选项，选择以现在窗口连接或者新开一个窗口连接(直接选择右侧的那个图标会默认新建窗口)，如果正常连接会有弹窗输入密码，或者在终端的命令行需要输入。<br>连接成功后左下角会显示SSH的连接情况，在右侧选择+号新建终端，即可连接上服务器。</p>
+<h3 id="5-获取文件目录："><a href="#5-获取文件目录：" class="headerlink" title="5. 获取文件目录："></a>5. 获取文件目录：</h3><p>选择Open Folder，会要求再一次输入密码，成功后可以访问服务器上的文件目录。</p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1、rm -r dirname</span><br><span class="line">2、mv dirname newdirname</span><br><span class="line">3、nvidia-smi 查看GPU状态</span><br><span class="line">5、pwd 查看当前目录</span><br><span class="line">6、conda info --envs 查看虚拟环境状态</span><br><span class="line">7、source activate pytorch</span><br><span class="line">8、conda deactivate</span><br><span class="line">9、lsb_release -a 查看Linux的版本信息可以使用命令</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">YounG</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/03/17/%E9%83%A8%E7%BD%B2Qwen/">http://example.com/2024/03/17/%E9%83%A8%E7%BD%B2Qwen/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/LLM/">LLM</a><a class="post-meta__tags" href="/tags/Basic-Skills/">Basic Skills</a></div><div class="post_share"><div class="social-share" data-image="/img/QWen.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/03/15/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">Hello World</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avator.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">YounG</div><div class="author-info__description">不以物喜，不以己悲</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/13ri" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:3181967794@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%BF%9C%E7%AB%AFminiconda%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">一、远端miniconda安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%BF%9B%E5%85%A5%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">二、进入虚拟环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%8F%AF%E8%81%94%E7%BD%91%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B"><span class="toc-number">2.1.</span> <span class="toc-text">1、可联网的情况下</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81SSH%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E9%85%8D%E7%BD%AE%EF%BC%88VS-Code"><span class="toc-number">3.</span> <span class="toc-text">三、SSH远程连接配置（VS Code)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-VScode%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">1. VScode的下载和安装：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85SSH%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%8F%92%E4%BB%B6-Remote-SSH"><span class="toc-number">3.2.</span> <span class="toc-text">2. 安装SSH远程连接插件 Remote-SSH :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B7%BB%E5%8A%A0%E5%BE%85%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-number">3.3.</span> <span class="toc-text">3. 添加待连接的服务器配置：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9A"><span class="toc-number">3.4.</span> <span class="toc-text">4. 连接服务器：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%EF%BC%9A"><span class="toc-number">3.5.</span> <span class="toc-text">5. 获取文件目录：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">常用命令</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/03/17/%E9%83%A8%E7%BD%B2Qwen/" title="QWen部署（配置环境篇）"><img src="/img/QWen.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="QWen部署（配置环境篇）"/></a><div class="content"><a class="title" href="/2024/03/17/%E9%83%A8%E7%BD%B2Qwen/" title="QWen部署（配置环境篇）">QWen部署（配置环境篇）</a><time datetime="2024-03-17T08:50:00.000Z" title="Created 2024-03-17 16:50:00">2024-03-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/15/hello-world/" title="Hello World">Hello World</a><time datetime="2024-03-15T15:13:03.275Z" title="Created 2024-03-15 23:13:03">2024-03-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/03/07/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0-By-Hexo/" title="我的第一篇文章 By Hexo">我的第一篇文章 By Hexo</a><time datetime="2021-03-07T09:15:57.000Z" title="Created 2021-03-07 17:15:57">2021-03-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By YounG</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading the Database</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
